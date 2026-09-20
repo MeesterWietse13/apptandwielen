@@ -185,7 +185,7 @@ export function WorkbenchApp({ mode }: Props) {
   const tryComplete = () => {
     if (!mission || !evaluation) return;
     if (evaluation.canComplete) {
-      updateMission((p) => completeMission(p, evaluation, targetLetter));
+      updateMission((p) => completeMission({ ...p, conclusion: mission.discovery ?? "" }, evaluation, targetLetter));
       dispatch({ type: "NOTICE", text: "✓ Ontdekking voltooid!", kind: "ok" });
     } else {
       updateMission((p) => ({ ...p, attempts: p.attempts + 1 }));
@@ -233,7 +233,7 @@ export function WorkbenchApp({ mode }: Props) {
   const onCheck = () => setReport(technicalReport(state.construction, analysis).lines);
   const onClear = () => {
     if (state.construction.components.length === 0) return;
-    if (window.confirm("Wil je de werkbank helemaal leegmaken?")) dispatch({ type: "CLEAR_ALL" });
+    if (window.confirm("Wil je alle tandwielen en kettingen in één keer opruimen?")) dispatch({ type: "CLEAR_ALL" });
   };
   const loadShared = (c: Construction) => {
     dispatch({ type: "LOAD", construction: c, keepHistory: true });
@@ -294,7 +294,6 @@ export function WorkbenchApp({ mode }: Props) {
               onSelectMission={selectMission}
               onSetPrediction={(v) => updateMission((p) => ({ ...p, prediction: v }))}
               onSetAnswer={(v) => updateMission((p) => ({ ...p, answer: v }))}
-              onSetConclusion={(v) => updateMission((p) => ({ ...p, conclusion: v }))}
               onTryComplete={tryComplete}
               onHint={() => updateMission((p) => ({ ...p, hintLevel: Math.min((mission?.hints.length ?? 0), p.hintLevel + 1) }))}
               onClearBench={onClear}
@@ -309,7 +308,6 @@ export function WorkbenchApp({ mode }: Props) {
               onSelectMission={selectMission}
               onSetPrediction={(v) => updateMission((p) => ({ ...p, prediction: v }))}
               onSetAnswer={(v) => updateMission((p) => ({ ...p, answer: v }))}
-              onSetConclusion={(v) => updateMission((p) => ({ ...p, conclusion: v }))}
               onTryComplete={tryComplete}
               onHint={() => updateMission((p) => ({ ...p, hintLevel: Math.min((mission?.hints.length ?? 0), p.hintLevel + 1) }))}
               onClearBench={onClear}

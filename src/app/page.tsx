@@ -92,6 +92,7 @@ export default function HomePage() {
             text="Alles wat je onderzocht, voorspeld, gemeten en besloten hebt. Ook af te drukken."
             accent="from-amber-500/30 to-amber-500/0"
           />
+          <ZoneCard href="/fietslab" icon="🚲" title="Fietslab" text="Onderzoek schakelen op een fiets. Bereik de top en sprint naar de finish met dezelfde beenkracht." accent="from-cyan-500/30 to-cyan-500/0" />
         </div>
 
         <div className="mt-12 grid w-full gap-3 text-sm text-slate-300 sm:grid-cols-4">

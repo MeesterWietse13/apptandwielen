@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AppShell } from "@/components/AppShell";
+import { BikeDiscoveries } from "@/components/bike/BikeDiscoveries";
+import { loadBikeJournal } from "@/lib/bike/discoveries";
 import { MiniConstruction } from "@/components/MiniConstruction";
 import { dirArrow, dirWord, fmtDate, fmtRevs, revsWords } from "@/lib/format";
 import type { MissionDef, MissionProgress, TestRecord } from "@/lib/missions/missionEngine";
@@ -10,8 +12,10 @@ import { loadData, updateData, type SavedData } from "@/lib/storage";
 
 export function DiscoveriesView() {
   const [data, setData] = useState<SavedData | null>(null);
+  const [hasBikeDiscoveries, setHasBikeDiscoveries] = useState(false);
   useEffect(() => {
     setData(loadData());
+    setHasBikeDiscoveries(Object.values(loadBikeJournal()).some(p => p.completed));
   }, []);
 
   const completed = useMemo(() => MISSIONS.filter((m) => m.kind === "discovery" && data?.progress[m.id]?.completed), [data]);
@@ -68,7 +72,7 @@ export function DiscoveriesView() {
           </div>
         </div>
 
-        {completed.length === 0 && (
+        {completed.length === 0 && !hasBikeDiscoveries && (
           <div className="card no-print text-slate-300">
             <div className="text-lg font-black text-slate-100">Nog geen ontdekkingen</div>
             <p className="mt-1 text-sm">Ga naar de Labzone, voorspel, bouw, test en meet. Elke afgeronde opdracht verschijnt hier.</p>
@@ -80,6 +84,7 @@ export function DiscoveriesView() {
 
         <Section title="Tandwielen" subtitle="Ontdekopdrachten over tandwielen die rechtstreeks in elkaar grijpen" items={gearDiscoveries} progress={data.progress} />
         <Section title="Kettingen" subtitle="Ontdekopdrachten over kettingoverbrengingen" items={chainDiscoveries} progress={data.progress} />
+        <BikeDiscoveries />
       </div>
     </div>
   );
@@ -179,7 +184,7 @@ function DiscoveryCard({ mission, progress }: { mission: MissionDef; progress: M
           {mission.answer && <Row label="Mijn antwoord">{optionLabel(mission, "answer", progress.answer)}</Row>}
           {mission.conclusionPrompt && (
             <Row label="Mijn besluit">
-              <span className="italic">“{progress.conclusion || "—"}”</span>
+              <span>{mission.discovery || progress.conclusion || "—"}</span>
             </Row>
           )}
           {mission.discovery && (

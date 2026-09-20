@@ -243,7 +243,7 @@ export function evaluateMission(def: MissionDef, progress: MissionProgress, live
   const truth = def.answer && mechanicsOk ? def.answer.truth(ctx) : null;
   const answerCorrect = def.answer && progress.answer && truth ? progress.answer === truth : null;
   const predictionOk = !def.prediction || !!progress.prediction;
-  const conclusionOk = !def.conclusionPrompt || progress.conclusion.trim().length >= 5;
+  const conclusionOk = !def.conclusionPrompt || (mechanicsOk && (!def.answer || answerCorrect === true));
   const canComplete =
     def.kind === "challenge"
       ? mechanicsOk

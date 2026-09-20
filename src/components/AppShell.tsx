@@ -6,6 +6,7 @@ const TABS = [
   { href: "/ontdekzone", label: "Ontdekzone", icon: "🔧" },
   { href: "/labzone", label: "Labzone", icon: "🧪" },
   { href: "/buildzone", label: "Buildzone", icon: "🏗️" },
+  { href: "/fietslab", label: "Fietslab", icon: "🚲" },
   { href: "/mijn-ontdekkingen", label: "Mijn ontdekkingen", icon: "📒" },
 ];
 

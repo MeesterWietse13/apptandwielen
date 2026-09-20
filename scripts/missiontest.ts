@@ -16,7 +16,7 @@ function train(teeth: number[], kind: ComponentKind = "gear", gap = 0): Construc
 function rec(c: Construction, kind: "oneTurn" | "test"): TestRecord { return buildRecord(c, analyze(c), kind, structureHash(c)); }
 function run(id: string, live: Construction, records: Construction[] | null, kind: "oneTurn" | "test", answers: Partial<MissionProgress> = {}) {
   const m = missionById(id)!;
-  let p: MissionProgress = { ...emptyProgress(), prediction: m.prediction ? m.prediction.options[0].id : null, conclusion: "Dit is mijn besluit.", ...answers };
+  let p: MissionProgress = { ...emptyProgress(), prediction: m.prediction ? m.prediction.options[0].id : null, conclusion: "", ...answers };
   for (const rc of records ?? []) p = addRecord(p, rec(rc, kind));
   p = addRecord(p, rec(live, kind));
   const ev = evaluateMission(m, p, { construction: live, analysis: analyze(live), hash: structureHash(live) });

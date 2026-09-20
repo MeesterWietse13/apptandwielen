@@ -111,8 +111,8 @@ export function TopControls({ state, dispatch, onZoom, onZoomReset, onFit, onChe
         <button className="btn-icon" onClick={onCheck} title="Controleer opstelling (technische fouten)">
           🔍
         </button>
-        <button className="btn-icon" onClick={onClear} disabled={state.construction.components.length === 0} title="Werkbank leegmaken">
-          🗑
+        <button className="btn-icon gap-1 text-xs" onClick={onClear} disabled={state.construction.components.length === 0} title="Alle tandwielen en kettingen opruimen">
+          <span aria-hidden="true">🧹</span> Opruimen
         </button>
       </div>
       <div className="pointer-events-auto flex items-center gap-1 rounded-xl border border-slate-700/70 bg-slate-900/85 p-1 shadow-lg backdrop-blur">

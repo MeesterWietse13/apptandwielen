@@ -12,13 +12,12 @@ interface Props {
   onSelectMission: (id: string) => void;
   onSetPrediction: (v: string) => void;
   onSetAnswer: (v: string) => void;
-  onSetConclusion: (v: string) => void;
   onTryComplete: () => void;
   onHint: () => void;
   onClearBench: () => void;
 }
 
-export function LabPanel({ zone, mission, progress, missionProgress, evaluation, onSelectMission, onSetPrediction, onSetAnswer, onSetConclusion, onTryComplete, onHint, onClearBench }: Props) {
+export function LabPanel({ zone, mission, progress, missionProgress, evaluation, onSelectMission, onSetPrediction, onSetAnswer, onTryComplete, onHint, onClearBench }: Props) {
   const [group, setGroup] = useState<MissionGroup>(mission?.group ?? "gears");
   const kind = zone === "lab" ? "discovery" : "challenge";
   const zoneMissions = zone === "lab" ? DISCOVERY_MISSIONS : CHALLENGE_MISSIONS;
@@ -88,7 +87,6 @@ export function LabPanel({ zone, mission, progress, missionProgress, evaluation,
           evaluation={evaluation}
           onSetPrediction={onSetPrediction}
           onSetAnswer={onSetAnswer}
-          onSetConclusion={onSetConclusion}
           onTryComplete={onTryComplete}
           onHint={onHint}
           onNext={() => {
@@ -108,14 +106,13 @@ interface ViewProps {
   evaluation: MissionEvaluation;
   onSetPrediction: (v: string) => void;
   onSetAnswer: (v: string) => void;
-  onSetConclusion: (v: string) => void;
   onTryComplete: () => void;
   onHint: () => void;
   onNext: () => void;
   onClearBench: () => void;
 }
 
-function MissionView({ mission, progress, evaluation, onSetPrediction, onSetAnswer, onSetConclusion, onTryComplete, onHint, onNext, onClearBench }: ViewProps) {
+function MissionView({ mission, progress, evaluation, onSetPrediction, onSetAnswer, onTryComplete, onHint, onNext, onClearBench }: ViewProps) {
   const isDiscovery = mission.kind === "discovery";
   const completed = progress.completed;
   const next = nextMissionOfKind(mission.id);
@@ -192,15 +189,9 @@ function MissionView({ mission, progress, evaluation, onSetPrediction, onSetAnsw
 
       {mission.conclusionPrompt && (
         <Section n={step++} title="Besluit" done={evaluation.conclusionOk} locked={!evaluation.mechanicsOk}>
-          <p className="mb-2 text-sm font-semibold text-slate-100">{mission.conclusionPrompt}</p>
-          <textarea
-            className="w-full rounded-lg border border-slate-700 bg-slate-950/60 p-2 text-sm text-slate-100 placeholder:text-slate-500 focus:border-sky-400 focus:outline-none"
-            rows={3}
-            placeholder={mission.conclusionPlaceholder}
-            value={progress.conclusion}
-            onChange={(e) => onSetConclusion(e.target.value)}
-            disabled={completed || !evaluation.mechanicsOk}
-          />
+          <p className="text-sm text-slate-100">{completed || evaluation.conclusionOk
+            ? mission.discovery
+            : "Voer de proef uit en kies het juiste antwoord. Daarna verschijnt je besluit hier."}</p>
         </Section>
       )}
 

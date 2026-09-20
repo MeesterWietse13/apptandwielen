@@ -1,0 +1,15 @@
+.bike-app{height:100dvh;display:flex;flex-direction:column;background:#020617;color:#f1f5f9;overflow:hidden}
+.bike-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-bottom:1px solid #1e293b;flex-shrink:0}
+.bike-heading h1{font-size:22px;font-weight:900}.bike-heading span{font-size:12px;color:#94a3b8}
+.bike-layout{display:grid;grid-template-columns:300px minmax(0,1fr);min-height:0;flex:1}
+.bike-lesson{overflow:auto;min-height:0;padding:12px;display:flex;flex-direction:column;gap:10px;border-right:1px solid #1e293b}.bike-lesson>.card{flex-shrink:0}.bike-lesson h3{font-weight:900;font-size:14px}.bike-lesson .option{font-size:13px}
+.bike-workspace{display:flex;flex-direction:column;min-width:0;min-height:0;padding:10px 14px;gap:8px;overflow:auto}
+.bike-scene-wrap{min-height:170px;flex:1;overflow:hidden;border:1px solid #334155;border-radius:16px;background:#0c2340}.bike-scene{height:100%;width:100%;display:block}
+.bike-readout{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-shrink:0}.bike-readout>div{min-width:0}.bike-readout span{display:block;font-size:11px;color:#94a3b8}.bike-readout strong{display:block;font-size:24px;font-weight:900;font-variant-numeric:tabular-nums}.bike-readout small{font-size:12px;color:#cbd5e1}.bike-force{width:220px}.bike-force span{margin-top:2px}
+.bike-meter{height:6px;overflow:hidden;border-radius:5px;background:#334155}.bike-meter>div{height:100%;border-radius:5px}
+.bike-route{display:flex;gap:22px;flex-shrink:0;font-size:11px;color:#cbd5e1}.bike-route label{flex:1}.bike-route progress{width:100%;height:6px;display:block;accent-color:#34d399}.bike-route .bike-meter{margin-top:3px}
+.bike-feedback{min-height:32px;font-size:13px;line-height:16px;color:#bae6fd;padding:4px 8px;border-left:3px solid #38bdf8;flex-shrink:0}
+.bike-controls{flex-shrink:0;display:flex;flex-direction:column;gap:6px}.bike-cassette{display:flex;justify-content:center;gap:5px}.bike-cassette button{display:flex;align-items:center;gap:4px;padding:4px 8px;font-size:12px}.bike-cassette svg{height:25px;width:25px}.bike-buttons{display:flex;justify-content:center;gap:7px;flex-wrap:wrap}.bike-buttons .btn{font-size:13px;padding:8px 12px}
+.bike-model{font-size:10px;color:#94a3b8;flex-shrink:0}.bike-model summary{cursor:pointer}.bike-model p{margin-top:6px;max-width:850px}
+@media(max-width:1050px){.bike-layout{grid-template-columns:270px minmax(0,1fr)}.bike-cassette button{padding:4px}.bike-cassette svg{width:18px}.bike-heading span{display:none}.bike-force{width:165px}.bike-readout strong{font-size:20px}}
+@media(max-width:740px){.bike-app{height:auto;min-height:100dvh;overflow:visible}.bike-heading{flex-wrap:wrap}.bike-layout{display:flex;flex-direction:column}.bike-workspace{order:0;overflow:visible;padding:10px}.bike-lesson{order:1;overflow:visible;border:0}.bike-scene-wrap{height:260px;flex:none}.bike-readout{flex-wrap:wrap}.bike-force{width:100%}.bike-cassette{gap:2px}.bike-cassette button{font-size:11px}.bike-cassette svg{width:14px}.bike-heading .seg{width:100%}.bike-heading .seg button{flex:1}}
